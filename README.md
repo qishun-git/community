@@ -2,12 +2,14 @@
 
 ## Reference
 https://spring.io/guides
+
 https://spring.io/guides/gs/serving-web-content/
+
 https://developer.github.com/apps/quickstart-guides/
 
 ## SQL
 ```sql
-(CREATE TABLE `user` (
+CREATE TABLE `user` (
   `id` int NOT NULL AUTO_INCREMENT,
   `account_id` varchar(100) DEFAULT NULL,
   `name` varchar(100) DEFAULT NULL,
