@@ -7,6 +7,8 @@ https://spring.io/guides/gs/serving-web-content/
 
 https://developer.github.com/apps/quickstart-guides/
 
+https://projectlombok.org/
+
 ## SQL
 ```sql
 CREATE TABLE `user` (
