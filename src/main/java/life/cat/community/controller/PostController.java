@@ -18,6 +18,8 @@ public class PostController {
     public String post(@PathVariable(name = "id") Integer id,
                        Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
+        //increase vidw count
+        questionService.incView(id);
         model.addAttribute("question", questionDTO);
         return "post";
     }
