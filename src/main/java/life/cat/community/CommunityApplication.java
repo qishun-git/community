@@ -1,9 +1,11 @@
 package life.cat.community;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@MapperScan("life.cat.community.mapper")
 public class CommunityApplication {
 
     public static void main(String[] args) {
