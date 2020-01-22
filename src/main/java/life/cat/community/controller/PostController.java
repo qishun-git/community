@@ -15,7 +15,7 @@ public class PostController {
     private QuestionService questionService;
 
     @GetMapping("/post/{id}")
-    public String post(@PathVariable(name = "id") Integer id,
+    public String post(@PathVariable(name = "id") Long id,
                        Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
         //increase vidw count
