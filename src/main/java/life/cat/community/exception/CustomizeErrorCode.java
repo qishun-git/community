@@ -8,6 +8,7 @@ public enum CustomizeErrorCode implements ICustomizeErrorCode{
     SYS_ERROR(2004, "System Error."),
     TYPE_PARAM_WRONG(2005, "Comment type not exist."),
     COMMENT_NOT_FOUND(2006, "Comment not found."),
+    COMMENT_IS_EMPTY(2006, "Please enter some comment."),
     ;
 
     @Override

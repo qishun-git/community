@@ -9,10 +9,10 @@ body {
 
 .btn-publish {
     float: right;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
-.media-object{
+.media-object {
     width: 38px;
     height: 38px;
 }
@@ -22,14 +22,48 @@ body {
     font-weight: normal;
     color: #999;
 }
+
 .profile .section {
     margin-top: 15px;
 }
+
 .commuity-menu {
     color: #999;
     font-size: 13px;
+    margin-bottom: 15px;;
 }
 
-.jumbotron{
+.jumbotron {
     margin: 50px;
+}
+
+.comment {
+    margin: 10px 0;
+}
+
+.sep {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 10px;
+    margin: 10px;
+}
+
+.comment-time {
+    color: #999999;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.comment-btn {
+    padding: 5px 10px;
+    color: #999999;
+    background-color: #f0f0f0;
+    border-radius: 20%;
+}
+
+.comment-btn:hover {
+    background-color: lightblue;
+}
+
+.comment-content {
+    padding-top: 0;
 }
