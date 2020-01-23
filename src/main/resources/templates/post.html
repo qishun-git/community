@@ -8,13 +8,17 @@
     <link rel="stylesheet" href="/css/community.css"/>
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/moment.js" type="application/javascript"></script>
     <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
+<!--nav-->
 <div th:replace="navigation :: nav"></div>
 <div class="container-fluid main profile">
     <div class="row">
+        <!--left-->
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <!--post-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">
                     <h3><span th:text="${question.title}"></span></h3>
@@ -32,6 +36,9 @@
                         Edit
                     </a>
                 </div>
+            </div>
+            <!--comment content-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <span th:text="${question.commentCount}"></span> Comments
                 </h4>
@@ -43,20 +50,40 @@
                                      th:src="${comment.user.avatarUrl}">
                             </a>
                         </div>
-                        <div class="media-body">
+                        <div class="media-body" th:id="${'comment-body-'+comment.id}">
                             <h5 class="media-heading">
                                 <span th:text="${comment.user.name}"></span>
                                 <span class="pull-right comment-time"
                                       th:text="${#dates.format(comment.gmtCreate, 'dd MMMM yyyy HH:mm')}"></span>
                             </h5>
-                            <div th:text="${comment.content}">
+                            <div th:text="${comment.content}"></div>
+                            <div class="comment-menu">
+                                <span class="glyphicon glyphicon-thumbs-up comment-btn" aria-hidden="true"></span>
+                                <span class="glyphicon glyphicon-thumbs-down comment-btn" aria-hidden="true"></span>
+                                <span th:data-id="${comment.id}"
+                                      onclick="collapseComments(this)" class="comment-btn" aria-hidden="true">
+                                    <span class="glyphicon glyphicon-comment"></span>
+                                    <span th:text="${comment.commentCount}"></span>
+                                </span>
                             </div>
-                            <span class="glyphicon glyphicon-thumbs-up comment-btn" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-thumbs-down comment-btn" aria-hidden="true"></span>
-                            <span class="glyphicon glyphicon-comment comment-btn" aria-hidden="true"></span>
+                            <!--Sub-comment-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse secondary-comment"
+                                 th:id="${'comment-'+comment.id}">
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <input type="text" class="form-control comment" placeholder="Comment here……"
+                                           th:id="${'input-'+comment.id}">
+                                    <button type="button" class="btn btn-success pull-right btn-publish"
+                                            onclick="comment(this)"
+                                            th:data-id="${comment.id}">Comment
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--add comment-->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">
                     Comment
                 </h4>
@@ -80,6 +107,7 @@
                 </div>
             </div>
         </div>
+        <!--right-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">
                 <h4>Author</h4>
@@ -102,5 +130,6 @@
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>

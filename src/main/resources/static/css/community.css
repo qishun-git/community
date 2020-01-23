@@ -44,7 +44,7 @@ body {
 .sep {
     border-bottom: 1px solid #f0f0f0;
     padding: 10px;
-    margin: 10px;
+    /*margin: 10px;*/
 }
 
 .comment-time {
@@ -57,13 +57,24 @@ body {
     padding: 5px 10px;
     color: #999999;
     background-color: #f0f0f0;
-    border-radius: 20%;
+    border-radius: 5px;
 }
 
 .comment-btn:hover {
-    background-color: lightblue;
+    background-color: dodgerblue;
 }
 
 .comment-content {
-    padding-top: 0;
+    /*padding-top: 0;*/
+}
+
+.comment-menu .active {
+    background-color: dodgerblue;
+}
+
+.secondary-comment{
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
 }

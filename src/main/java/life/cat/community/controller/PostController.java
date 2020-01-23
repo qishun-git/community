@@ -2,6 +2,7 @@ package life.cat.community.controller;
 
 import life.cat.community.dto.CommentDTO;
 import life.cat.community.dto.QuestionDTO;
+import life.cat.community.enums.CommentTypeEnum;
 import life.cat.community.service.CommentService;
 import life.cat.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class PostController {
     public String post(@PathVariable(name = "id") Long id, Model model) {
         QuestionDTO questionDTO = questionService.getById(id);
 
-        List<CommentDTO> comments = commentService.listByQuestionId(id);
+        List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
         //increase view count
         questionService.incView(id);
         model.addAttribute("question", questionDTO);
