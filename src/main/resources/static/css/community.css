@@ -27,10 +27,10 @@ body {
     margin-top: 15px;
 }
 
-.commuity-menu {
+.community-menu {
     color: #999;
     font-size: 13px;
-    margin-bottom: 15px;;
+    margin-bottom: 15px;
 }
 
 .jumbotron {
@@ -55,6 +55,7 @@ body {
 
 .comment-btn {
     padding: 5px 10px;
+    margin: 0 5px;
     color: #999999;
     background-color: #f0f0f0;
     border-radius: 5px;
@@ -62,6 +63,7 @@ body {
 
 .comment-btn:hover {
     background-color: dodgerblue;
+    color: white;
 }
 
 .comment-content {
@@ -70,6 +72,7 @@ body {
 
 .comment-menu .active {
     background-color: dodgerblue;
+    color: white;
 }
 
 .secondary-comment{
@@ -77,4 +80,12 @@ body {
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+}
+
+.post-content{
+    min-height: 380px;
+}
+
+.right-section {
+    border-left: 1px solid #f0f0f0;
 }

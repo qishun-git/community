@@ -5,6 +5,7 @@ function post() {
     comment2target(questionId, 1, content);
 }
 
+//actual comment function
 function comment2target(targetId, type, content) {
     if (content == null) {
         alert("Comment something~ Meow~");
@@ -39,6 +40,8 @@ function comment2target(targetId, type, content) {
     });
 }
 
+
+//comment comment
 function comment(e) {
     var id = $(e).data("id");
     var content = $("#input-" + id).val();
@@ -89,7 +92,10 @@ function collapseComments(e) {
                         "aria-hidden":"true"
                     })).append($("<span/>", {
                         "class":"glyphicon glyphicon-comment comment-btn",
-                        "aria-hidden":"true"
+                        "aria-hidden":"true",
+                        "onclick":"subComment(this)",
+                        "data-name": comment.user.name,
+                        "data-id":comment.parentId
                     })));
 
                     var mediaElement = $("<div/>", {
@@ -97,7 +103,7 @@ function collapseComments(e) {
                     }).append(mediaLeftElement).append(mediaBodyElement);
 
                     var commentElement = $("<div/>", {
-                        "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comments"
+                        "class": "col-lg-12 col-md-12 col-sm-12 col-xs-12 comment sep"
                     }).append(mediaElement);
 
                     subCommentContainer.prepend(commentElement);
@@ -110,4 +116,10 @@ function collapseComments(e) {
             });
         }
     }
+}
+
+function subComment(e) {
+    var name = $(e).data("name");
+    var id = $(e).data("id");
+    $("#input-"+id).val("@"+name+": ")
 }
