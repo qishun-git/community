@@ -27,4 +27,10 @@
     where id = #{id}
     </update>
 
+  <select id="selectRelated" parameterType="life.cat.community.model.Question" resultMap="BaseResultMap">
+    select *
+    from question
+    where id != #{id} and tag regexp #{tag}
+  </select>
+
 </mapper>

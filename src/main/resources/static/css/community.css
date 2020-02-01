@@ -55,7 +55,7 @@ body {
 
 .comment-btn {
     padding: 5px 10px;
-    margin: 0 5px;
+    margin-right: 5px;
     color: #999999;
     background-color: #f0f0f0;
     border-radius: 5px;
@@ -75,6 +75,10 @@ body {
     color: white;
 }
 
+.post-menu {
+    margin-top: 10px;
+}
+
 .secondary-comment{
     border: 1px solid #f0f0f0;
     border-radius: 10px;
@@ -88,4 +92,14 @@ body {
 
 .right-section {
     border-left: 1px solid #f0f0f0;
+}
+
+.post-tag {
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.realtedPost {
+    line-height: 20px;
+    font-size: 14px;
 }
