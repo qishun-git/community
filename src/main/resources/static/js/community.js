@@ -85,17 +85,17 @@ function collapseComments(e) {
                     })).append($("<div/>", {
                         "class": "comment-menu"
                     }).append($("<span/>", {
-                        "class":"glyphicon glyphicon-thumbs-down comment-btn",
-                        "aria-hidden":"true"
+                        "class": "glyphicon glyphicon-thumbs-down comment-btn",
+                        "aria-hidden": "true"
                     })).append($("<span/>", {
-                        "class":"glyphicon glyphicon-thumbs-up comment-btn",
-                        "aria-hidden":"true"
+                        "class": "glyphicon glyphicon-thumbs-up comment-btn",
+                        "aria-hidden": "true"
                     })).append($("<span/>", {
-                        "class":"glyphicon glyphicon-comment comment-btn",
-                        "aria-hidden":"true",
-                        "onclick":"subComment(this)",
+                        "class": "glyphicon glyphicon-comment comment-btn",
+                        "aria-hidden": "true",
+                        "onclick": "subComment(this)",
                         "data-name": comment.user.name,
-                        "data-id":comment.parentId
+                        "data-id": comment.parentId
                     })));
 
                     var mediaElement = $("<div/>", {
@@ -121,5 +121,22 @@ function collapseComments(e) {
 function subComment(e) {
     var name = $(e).data("name");
     var id = $(e).data("id");
-    $("#input-"+id).val("@"+name+": ")
+    $("#input-" + id).val("@" + name + ": ")
+}
+
+function selectTag(e) {
+    value = $(e).data("id");
+    var pre = $("#tag").val();
+    if (pre) {
+        if (pre.indexOf(value) == -1) {
+            $("#tag").val(pre + "," + value);
+        }
+    } else {
+        $("#tag").val(value);
+    }
+
+}
+
+function showSelectTag() {
+    $("#select-tag").show();
 }
