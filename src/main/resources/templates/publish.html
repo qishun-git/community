@@ -37,14 +37,18 @@
                     <div id="select-tag" class="publish-tag-tab">
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" th:each="category:${tags}">
-                                <a th:href="'#'+${category.categoryName}" aria-controls="profile" role="tab" data-toggle="tab"
+                            <li role="presentation" th:each="category,categoryStat:${tags}"
+                                th:class="${categoryStat.first? 'active':''}">
+                                <a th:href="'#'+${category.categoryName}" aria-controls="profile" role="tab"
+                                   data-toggle="tab"
                                    th:text="${category.categoryName}"></a>
                             </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane" th:id="${category.categoryName}" th:each="category:${tags}">
+                            <div role="tabpanel" th:id="${category.categoryName}"
+                                 th:each="category,categoryStat:${tags}"
+                                 th:class="${categoryStat.first? 'tab-pane active':'tab-pane'}">
                                     <span class="label label-info" aria-hidden="true" th:each="tag:${category.tags}">
                                         <span th:text="' '+${tag}" onclick="selectTag(this)" th:data-id="${tag}"></span>
                                     </span>

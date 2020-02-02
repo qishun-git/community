@@ -25,12 +25,16 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a th:href="@{'./post/'+${question.id}}" th:text="${question.title}"></a>
+                        <a th:href="@{'/post/'+${question.id}}" th:text="${question.title}"></a>
                     </h4>
-                    <span th:text="${question.content}"></span><br>
+                    <span class="media-middle" th:text="${question.content}"></span><br>
                     <span class="text-desc"><span th:text="${question.commentCount}"></span> Replies |
                     <span th:text="${question.viewCount}"></span> Views | <span
-                                th:text="${#dates.format(question.gmtCreate, 'dd MMMM yyyy')}"></span></span>
+                                th:text="${#dates.format(question.gmtCreate, 'dd MMMM yyyy')}"></span> | </span>
+                    <a class="text-desc" th:href="@{'/publish/'+${question.id}}" th:if="${session.user != null && session.user.id == question.author}">
+                        <span class="text-desc glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        Edit
+                    </a>
                 </div>
             </div>
         </div>
