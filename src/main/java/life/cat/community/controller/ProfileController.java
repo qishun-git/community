@@ -1,7 +1,9 @@
 package life.cat.community.controller;
 
 import life.cat.community.dto.PaginationDTO;
+import life.cat.community.model.Notification;
 import life.cat.community.model.User;
+import life.cat.community.service.NotificationService;
 import life.cat.community.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,9 @@ public class ProfileController {
     @Autowired
     private QuestionService questionService;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @GetMapping("/profile/{action}")
     public String profile(HttpServletRequest request,
                           @PathVariable(name = "action") String action,
@@ -32,13 +37,18 @@ public class ProfileController {
         if ("posts".equals(action)) {
             model.addAttribute("section", "posts");
             model.addAttribute("sectionName", "My Posts");
+            PaginationDTO paginationDTO = questionService.listByUserId(user.getId(), page, size);
+            model.addAttribute("pagination", paginationDTO);
         } else if ("replies".equals(action)) {
+            PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
+            Long unreadCount = notificationService.unreadCount(user.getId());
             model.addAttribute("section", "replies");
+            model.addAttribute("pagination", paginationDTO);
+            model.addAttribute("unreadCount", unreadCount);
             model.addAttribute("sectionName", "My Replies");
+
         }
 
-        PaginationDTO paginationDTO = questionService.listByUserId(user.getId(), page, size);
-        model.addAttribute("pagination", paginationDTO);
         return "profile";
     }
 }

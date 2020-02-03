@@ -2,6 +2,8 @@ package life.cat.community.service;
 
 import life.cat.community.dto.CommentDTO;
 import life.cat.community.enums.CommentTypeEnum;
+import life.cat.community.enums.NotificationStatusEnum;
+import life.cat.community.enums.NotificationTypeEnum;
 import life.cat.community.exception.CustomizeErrorCode;
 import life.cat.community.exception.CustomizeException;
 import life.cat.community.mapper.*;
@@ -35,8 +37,11 @@ public class CommentService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
+    @Autowired
+    private NotificationMapper notificationMapper;
+
     @Transactional
-    public void insert(Comment comment) {
+    public void insert(Comment comment, User commentator) {
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -50,13 +55,20 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
-
+            //reply post
+            Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+            if (question == null) {
+                throw new CustomizeException(CustomizeErrorCode.POST_NOT_FOUND);
+            }
             // increase comment_count
             commentMapper.insert(comment);
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
             commentExtMapper.incCommentCount(parentComment);
+
+            //notify author
+            createNotify(comment, dbComment.getAuthor(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
         } else {
             //reply post
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -66,7 +78,22 @@ public class CommentService {
             commentMapper.insert(comment);
             question.setCommentCount(1);
             questionExtMapper.incCommentCount(question);
+            //notify author
+            createNotify(comment, question.getAuthor(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_POST, question.getId());
         }
+    }
+
+    private void createNotify(Comment comment, Long receiver, String notifiername, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(notificationType.getType());
+        notification.setOuterid(outerId);
+        notification.setNotifier(comment.getAuthor());
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setReceiver(receiver);
+        notification.setNotifierName(notifiername);
+        notification.setOuterTitle(outerTitle);
+        notificationMapper.insert(notification);
     }
 
     public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum type) {
