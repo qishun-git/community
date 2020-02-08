@@ -61,12 +61,12 @@
                         <div class="media-left">
                             <a href="#">
                                 <img class="media-object img-rounded"
-                                     th:src="${question.user.avatarUrl}">
+                                     th:src="${session.user != null ? session.user.avatarUrl : '/images/default-avatar.png'}">
                             </a>
                         </div>
                         <div class="media-body">
                             <h5 class="media-middle">
-                                <span th:text="${question.user.name}"></span>
+                                <span th:text="${session.user != null ? session.user.name : 'Anonymous'}"></span>
                             </h5>
                         </div>
                     </div>
