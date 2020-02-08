@@ -1,7 +1,6 @@
 package life.cat.community.controller;
 
 import life.cat.community.dto.PaginationDTO;
-import life.cat.community.model.Notification;
 import life.cat.community.model.User;
 import life.cat.community.service.NotificationService;
 import life.cat.community.service.QuestionService;
@@ -28,7 +27,7 @@ public class ProfileController {
                           @PathVariable(name = "action") String action,
                           Model model,
                           @RequestParam(name = "page", defaultValue = "1") Integer page,
-                          @RequestParam(name = "size", defaultValue = "5") Integer size) {
+                          @RequestParam(name = "size", defaultValue = "10") Integer size) {
         User user = (User) request.getSession().getAttribute("user");
         if (user == null) {
             return "redirect:/";
@@ -41,10 +40,8 @@ public class ProfileController {
             model.addAttribute("pagination", paginationDTO);
         } else if ("replies".equals(action)) {
             PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
-            Long unreadCount = notificationService.unreadCount(user.getId());
             model.addAttribute("section", "replies");
             model.addAttribute("pagination", paginationDTO);
-            model.addAttribute("unreadCount", unreadCount);
             model.addAttribute("sectionName", "My Replies");
 
         }

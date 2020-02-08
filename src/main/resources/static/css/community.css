@@ -90,6 +90,14 @@ body {
     min-height: 380px;
 }
 
+.post-content div img{
+    max-width: 100%;
+}
+
+.richText-editor div img{
+    max-width: 100%;
+}
+
 .right-section {
     border-left: 1px solid #f0f0f0;
 }

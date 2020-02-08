@@ -29,7 +29,7 @@
                 </span>
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep post-content"
-                     th:text="${question.content}"></div>
+                     th:utext="${question.content}"></div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">
                     <span class="label label-info post-tag" th:each="tag:${question.tag.split(',')}">
                         <span class="glyphicon glyphicon-tags post-tag" aria-hidden="true"></span>
@@ -148,7 +148,7 @@
             <!--Leopold-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">
                 <h4>This is Leopold the Big Brother</h4>
-                <img src="/img/leopold.jpg" class="img-thumbnail">
+                <img src="/images/leopold.jpg" class="img-thumbnail">
             </div>
             <!--Related Post-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep">

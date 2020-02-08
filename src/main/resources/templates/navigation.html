@@ -22,7 +22,7 @@
                     <li>
                         <a href="/profile/replies">
                             <span class="glyphicon glyphicon-bell"></span>
-                            <span class="badge">42</span>
+                            <span class="badge" th:text="${session.unreadMessage}"></span>
                         </a>
                     </li>
                     <li th:if="${session.user}!=null">
