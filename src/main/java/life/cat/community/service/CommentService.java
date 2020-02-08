@@ -84,6 +84,9 @@ public class CommentService {
     }
 
     private void createNotify(Comment comment, Long receiver, String notifiername, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+        if (receiver == comment.getAuthor()) {
+            return;
+        }
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setType(notificationType.getType());

@@ -29,7 +29,7 @@ public class ProfileController {
                           @RequestParam(name = "page", defaultValue = "1") Integer page,
                           @RequestParam(name = "size", defaultValue = "10") Integer size) {
         User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
+        if (user == null) { 
             return "redirect:/";
         }
 

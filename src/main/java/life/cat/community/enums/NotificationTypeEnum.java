@@ -1,8 +1,8 @@
 package life.cat.community.enums;
 
 public enum NotificationTypeEnum {
-    REPLY_POST(1, "replied your post"),
-    REPLY_COMMENT(2, "replied your comment")
+    REPLY_POST(1, "replied in your post"),
+    REPLY_COMMENT(2, "replied your comment in")
     ;
 
     public int getType() {

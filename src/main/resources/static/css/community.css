@@ -67,7 +67,13 @@ body {
 }
 
 .comment-content {
-    /*padding-top: 0;*/
+    margin-bottom: 15px;
+}
+
+.comment-empty {
+    margin-bottom: 15px;
+    text-size: 14px;
+    color: #666;
 }
 
 .comment-menu .active {
@@ -122,4 +128,10 @@ body {
     margin: 5px;
     white-space: normal;
     display: inline-block;
+}
+
+footer {
+    color: #666;
+    text-align: center;
+    padding: 10px 20px;
 }

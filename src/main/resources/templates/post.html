@@ -80,6 +80,9 @@
                 <h4 class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <span th:text="${question.commentCount}"></span> Comments
                 </h4>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep comment-empty" th:if="${comments==null or comments.isEmpty()}">
+                    Be the first to comment!
+                </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 sep comment-content" th:each="comment: ${comments}">
                     <div class="media">
                         <div class="media-left">
@@ -160,5 +163,6 @@
         </div>
     </div>
 </div>
+<div th:replace="footer :: foot"></div>
 </body>
 </html>

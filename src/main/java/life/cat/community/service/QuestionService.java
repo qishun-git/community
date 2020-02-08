@@ -1,6 +1,7 @@
 package life.cat.community.service;
 
 import life.cat.community.dto.PaginationDTO;
+import life.cat.community.dto.PostQueryDTO;
 import life.cat.community.dto.QuestionDTO;
 import life.cat.community.exception.CustomizeErrorCode;
 import life.cat.community.exception.CustomizeException;
@@ -31,10 +32,18 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, Integer page, Integer size) {
+        if (StringUtils.isNotBlank(search)) {
+            search = search.replace(' ', '|');
+        } else {
+            search = null;
+        }
+
 
         PaginationDTO paginationDTO = new PaginationDTO();
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
+        PostQueryDTO postQueryDTO = new PostQueryDTO();
+        postQueryDTO.setSearch(search);
+        Integer totalCount = questionExtMapper.countBySearch(postQueryDTO);
         Integer totalPage = 0;
 
         if (totalCount % size == 0) {
@@ -57,9 +66,12 @@ public class QuestionService {
             page = paginationDTO.getTotalPage();
         }
         Integer offset = size * (page - 1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+        if (offset < 0) {
+            offset = 0;
+        }
+        postQueryDTO.setPage(offset);
+        postQueryDTO.setSize(size);
+        List<Question> questions = questionExtMapper.selectBySearch(postQueryDTO);
         List<QuestionDTO> questionDTOS = new ArrayList<>();
 
         for (Question question : questions) {
@@ -161,7 +173,7 @@ public class QuestionService {
             return new ArrayList<>();
         }
         String tags = questionDTO.getTag().replace(',', '|');
-        tags = tags.replaceAll("\\s", "");
+        tags = tags.replaceAll("\\s+", "");
         Question question = new Question();
         question.setId(questionDTO.getId());
         question.setTag(tags);
