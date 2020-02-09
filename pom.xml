@@ -97,8 +97,8 @@
                 <version>6.1.4</version>
                 <configuration>
                     <url>jdbc:mysql://localhost:3306/community</url>
-                    <user>root</user>
-                    <password>password</password>
+                    <user>catmunity</user>
+                    <password>Catmunity666!</password>
                 </configuration>
                 <dependencies>
                     <dependency>
