@@ -1,6 +1,9 @@
 package life.cat.community.provider;
 
 import com.amazonaws.AmazonServiceException;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
@@ -24,11 +27,22 @@ public class AWSProvider {
     @Value("${aws.image.bucket-prefix}")
     private String prefix;
 
+    @Value("${aws.access-key}")
+    private String accessKey;
+
+    @Value("${aws.secret-key}")
+    private String secretKey;
+
 
     public String uploadImg(InputStream fileStream, String fileName, long size) {
         String key_name = UUID.randomUUID().toString() + "." + fileName.split("\\.")[1];
-
-        final AmazonS3 s3 = AmazonS3ClientBuilder.standard().withRegion(Regions.fromName(region)).build();
+        AWSCredentials credentials = new BasicAWSCredentials(
+                accessKey,
+                secretKey
+        );
+        final AmazonS3 s3 = AmazonS3ClientBuilder.standard()
+                .withCredentials(new AWSStaticCredentialsProvider(credentials))
+                .withRegion(Regions.fromName(region)).build();
         try {
             ObjectMetadata metadata = new ObjectMetadata();
             metadata.setContentLength(size);
