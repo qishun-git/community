@@ -96,9 +96,9 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>6.1.4</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/community</url>
-                    <user>catmunity</user>
-                    <password>Catmunity666!</password>
+                    <url>jdbc:mysql://community.crapdlpvhwwr.us-east-2.rds.amazonaws.com:3306/community</url>
+                    <user>root</user>
+                    <password>password</password>
                 </configuration>
                 <dependencies>
                     <dependency>
